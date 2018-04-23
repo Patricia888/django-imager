@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from multiselectfield import MultiSelectField
 
 
-class ShopperProfile(models.Model):
+class ImagerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     bio = models.TextField(blank=True, null=True)
