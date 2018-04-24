@@ -1,1 +1,2 @@
 Activate your Imager account today!
+http://{{site}}{% url 'registration_activate' activation_key=activation_key %}
