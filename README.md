@@ -1,7 +1,6 @@
 # django-imager
-
-
-Author: Patricia Raftery and George Ceja Version: 1.0.0
+Author: Patricia Raftery and George Ceja
+Version: 1.0.0
 
 ## Overview
 
@@ -13,9 +12,12 @@ Author: Patricia Raftery and George Ceja Version: 1.0.0
 
 
 ## Architecture
+Python 3.6
+Django
 
 
 ## Change Log
 
 
 ### Day 1
+v0.1 Created Scaffold similar to the Pinterest App
