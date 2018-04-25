@@ -19,12 +19,14 @@ h1 {
   font-style: italic;
   text-align: center;
   padding-bottom: 15px;
+  font-size: 33px;
 }
 
 h2, h3 {
   font-family: 'Roboto';
   font-style: italic;
   text-align: center;
+  font-size: 30px;
 }
 
 nav li {
@@ -39,4 +41,8 @@ form {
 form input {
     color: white;
     background-color: grey;
+}
+
+img {
+    margin-left: 61px;
 }
