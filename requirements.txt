@@ -1,5 +1,6 @@
 appnope==0.1.0
 backcall==0.1.0
+coverage==4.5.1
 decorator==4.3.0
 Djgano-registration=2.4.1
 Django==2.0.4
