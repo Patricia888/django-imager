@@ -9,6 +9,10 @@ from multiselectfield import MultiSelectField
 
 
 class ImagerProfile(models.Model):
+    """
+    Creates Profile model for users account. Uses User as it's foreignkey to
+    join tables.
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     bio = models.TextField(blank=True, null=True)
@@ -37,9 +41,10 @@ class ImagerProfile(models.Model):
                     ('underwater', 'Underwater')))
 
     def __str__(self):
+        """Returns current user's username"""
         return self.user.username
 
     @classmethod
     def active(cls):
+        """Validates if user is currently active"""
         return cls.objects.filter(is_active=True)
-

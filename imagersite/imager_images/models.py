@@ -4,6 +4,10 @@ from sorl.thumbnail import ImageField
 
 
 class Albums(models.Model):
+    """
+    Creates Album model with USER as it's ForeignKey.
+    Albums is truncated if user is deleted from table.
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='albums')
     cover = models.ForeignKey('Photo', on_delete=models.CASCADE, related_name='+', null=True, blank=True)
     title = models.CharField(max_length=180, default='Untitled')
@@ -22,10 +26,15 @@ class Albums(models.Model):
     )
 
     def __str__(self):
+        """Returns representation of current Album title."""
         return '{}'.format(self.name)
 
 
 class Photo(models.Model):
+    """
+    Creates Photo model that uses one way connection to Album to join both
+    tables to build assocation stream.
+    """
     product = models.ForeignKey(Albums, on_delete=models.CASCADE, related_name='photos')
     image = ImageField(upload_to='images')
     title = models.CharField(max_length=180, default='Untitled')
@@ -43,4 +52,5 @@ class Photo(models.Model):
     )
 
     def __str__(self):
+        """Returns representation of current Photo title."""
         return '{}'.format(self.title)

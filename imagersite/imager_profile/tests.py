@@ -4,6 +4,7 @@ import factory
 
 
 class UserFactory(factory.django.DjangoModelFactory):
+    """Creates dummy user instance for test cases."""
     class Meta:
         model = User
 
@@ -12,6 +13,7 @@ class UserFactory(factory.django.DjangoModelFactory):
 
 
 class ProfileFactory(factory.django.DjangoModelFactory):
+    """Creates Profile for users ImagerProfile."""
     class Meta:
         model = ImagerProfile
 
@@ -23,6 +25,7 @@ class ProfileFactory(factory.django.DjangoModelFactory):
 
 
 class ProfileUnitTests(TestCase):
+    """Unit test cases used for testing functionality inside project"""
     @classmethod
     def setUpClass(cls):
         super(TestCase, cls)
@@ -36,10 +39,12 @@ class ProfileUnitTests(TestCase):
 
     @classmethod
     def tearDownClass(cls):
+        """Cleans up class by removing all attributes off user."""
         super(TestCase, cls)
         User.objects.all().delete()
 
     def test_user_can_see_its_profile(self):
+        """Tests if user profile is present and active."""
         one_user = User.objects.first()
         self.assertIsNotNone(one_user.profile)
 
