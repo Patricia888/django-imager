@@ -35,10 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sorl.thumbnail'
+    'sorl.thumbnail',
     'imagersite',
     'imager_profile',
-    'imager_images'
+    'imager_images',
     'registration',
 ]
 
