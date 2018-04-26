@@ -21,6 +21,7 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     location = factory.Faker('street_address')
     website = factory.Faker('uri')
     fee = 45
+    bio = 'hello world'
     camera = 'dsr'
 
 

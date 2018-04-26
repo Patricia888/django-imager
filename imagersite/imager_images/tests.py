@@ -3,7 +3,7 @@ from .models import User
 import factory
 
 from .models import Albums, Photo
-
+from imager_profile.models import ImagerProfile
 from random import choice
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
@@ -52,6 +52,18 @@ class AlbumsFactory(factory.django.DjangoModelFactory):
     published = choice(['private', 'shared', 'public'])
 
 
+class ProfileFactory(factory.django.DjangoModelFactory):
+    """Creates Profile for users ImagerProfile."""
+    class Meta:
+        model = ImagerProfile
+
+    phone = factory.Faker('phone_number')
+    location = factory.Faker('street_address')
+    website = factory.Faker('uri')
+    fee = 45
+    camera = 'dsr'
+
+
 class ProfileUnitTests(TestCase):
     '''testing photo and albums'''
     @classmethod
@@ -61,20 +73,23 @@ class ProfileUnitTests(TestCase):
         user = UserFactory.create()
         user.set_password(factory.Faker('password'))
         user.save()
+        profile = ProfileFactory.create(user=user)
+        profile.save()
 
-        albums = AlbumsFactory.create(user=user)
-        albums.save()
-        for _ in range(2):
-            photo = PhotoFactory.create(user=user)
-            photo.save()
-            albums.photos.add(photo)
 
-        albums2 = AlbumsFactory.create(user=user)
-        albums2.save()
-        for _ in range(3):
-            photo = PhotoFactory.create(user=user)
-            photo.save()
-            albums2.photos.add(photo)
+        # albums = AlbumsFactory.create(user=user)
+        # albums.save()
+        # for _ in range(2):
+        #     photo = PhotoFactory.create(user=user)
+        #     photo.save()
+        #     albums.photos.add(photo)
+
+        # albums2 = AlbumsFactory.create(user=user)
+        # albums2.save()
+        # for _ in range(3):
+        #     photo = PhotoFactory.create(user=user)
+        #     photo.save()
+        #     albums2.photos.add(photo)
 
     @classmethod
     def tearDownClass(cls):
@@ -82,37 +97,37 @@ class ProfileUnitTests(TestCase):
         super(TestCase, cls)
         User.objects.all().delete()
 
-    def test_one_photo(self):
-        """test photo is there when it is there"""
-        one_photo = Photo.objects.first()
-        self.assertIsNotNone(one_photo)
+    # def test_one_photo(self):
+    #     """test photo is there when it is there"""
+    #     one_photo = Photo.objects.first()
+    #     self.assertIsNotNone(one_photo)
 
-    def test_photo_title(self):
-        """test photo that the photo title is a str"""
-        image = Photo.objects.first()
-        self.assertIsInstance(image.title, str)
+    # def test_photo_title(self):
+    #     """test photo that the photo title is a str"""
+    #     image = Photo.objects.first()
+    #     self.assertIsInstance(image.title, str)
 
-    def test_photo_description(self):
-        """test that the photo description is a str"""
-        image = Photo.objects.first()
-        self.assertIsInstance(image.description, str)
+    # def test_photo_description(self):
+    #     """test that the photo description is a str"""
+    #     image = Photo.objects.first()
+    #     self.assertIsInstance(image.description, str)
 
-    def test_photo_date_uploaded(self):
-        """test photo upload date"""
-        image = Photo.objects.first()
-        self.assertIsInstance(image.date_uploaded, object)
+    # def test_photo_date_uploaded(self):
+    #     """test photo upload date"""
+    #     image = Photo.objects.first()
+    #     self.assertIsInstance(image.date_uploaded, object)
 
-    def test_one_albums(self):
-        """test albums is there when it is there"""
-        one_albums = Albums.objects.first()
-        self.assertIsNotNone(one_albums)
+    # def test_one_albums(self):
+    #     """test albums is there when it is there"""
+    #     one_albums = Albums.objects.first()
+    #     self.assertIsNotNone(one_albums)
 
-    def test_albums_title(self):
-        """test that the albums title is a str"""
-        albums = Albums.objects.first()
-        self.assertIsInstance(albums.title, str)
+    # def test_albums_title(self):
+    #     """test that the albums title is a str"""
+    #     albums = Albums.objects.first()
+    #     self.assertIsInstance(albums.title, str)
 
-    def test_albums_description(self):
-        """test that the albums description is a str"""
-        albums = Albums.objects.first()
-        self.assertIsInstance(albums.description, str)
+    # def test_albums_description(self):
+    #     """test that the albums description is a str"""
+    #     albums = Albums.objects.first()
+    #     self.assertIsInstance(albums.description, str)
