@@ -12,7 +12,7 @@ class Albums(models.Model):
     cover = models.ForeignKey('Photo', on_delete=models.CASCADE, related_name='+', null=True, blank=True)
     title = models.CharField(max_length=180, default='Untitled')
     description = models.TextField(blank=True, null=True)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
     date_published = models.DateField(blank=True, null=True)
