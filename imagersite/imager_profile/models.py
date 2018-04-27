@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-# Create your models here.
-
-# may need to edit later:
+from django.dispatch import receiver
 
 from multiselectfield import MultiSelectField
 
@@ -48,3 +45,10 @@ class ImagerProfile(models.Model):
     def active(cls):
         """Validates if user is currently active"""
         return cls.objects.filter(is_active=True)
+
+
+@receiver(models.signals.post_save, sender=User)
+def create_profile(sender, **keys):
+    if keys['created']:
+        profile = ImagerProfile(user=keys['instance'])
+        profile.save()
