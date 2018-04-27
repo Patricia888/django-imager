@@ -23,6 +23,6 @@ Inside the root directory:
 
 
 ## Change Log
-v1.2 - Users now have a collection of their pictures that show their hidden files.
-v1.1 - Users can now create accounts and add pictures to their albums.
-v1.0 - Created Scaffold for project
+- v1.2 - Users now have a collection of their pictures that show their hidden files.
+- v1.1 - Users can now create accounts and add pictures to their albums.
+- v1.0 - Created Scaffold for project
