@@ -64,3 +64,19 @@ class ProfileUnitTests(TestCase):
         """testing that the profile phone number is a str"""
         prof = ImagerProfile.objects.first()
         self.assertNotIsInstance(prof.phone, str)
+
+    # def test_profile_view_default_owner_false(self):
+    #     '''test that the default is owner is false'''
+    #     from .views import profile_view
+    #     self.assertFalse(profile_view.owner)
+
+
+
+# EXAMPLE from mid term project
+
+# def test_default_behavior_of_about_view(dummy_request):
+#     """Test default about behavior."""
+#     from ..views.default import about_view
+#     response = about_view(dummy_request)
+#     assert len(response) == 0
+#     assert type(response) == dict
