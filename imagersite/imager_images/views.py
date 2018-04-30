@@ -1,20 +1,24 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from imager_images.models import Albums, Photo
+from imager_profile.models import ImagerProfile
 
 
-def library_view(request):
+def library_view(request, username=None):
     '''Will show the user\'s library.'''
-  
-    username = request.user.get_username()
-    if username == "":
-        return redirect("home")
 
+    if not username:
+        username = request.user.get_username()
+        if username == "":
+            return redirect("home")
+
+    profile = get_object_or_404(ImagerProfile, user__username=username)
     albums = Albums.objects.filter(user__username=username)
     photos = Photo.objects.filter(product__user__username=username)
 
     context = {
+        "profile": profile,
         "albums": albums,
-        "photos": photos
+        "photos": photos,
     }
 
     return render(request, "imager_profile/library.html", context)
@@ -30,6 +34,7 @@ def albums_view_detail(request, username=None):
         if username == "":
             return redirect("home")
 
+    profile = get_object_or_404(ImagerProfile, user__username=username)
     albums = Albums.objects.filter(user__username=username)
     photos = Photo.objects.filter(product__user__username=username)
 
@@ -38,6 +43,7 @@ def albums_view_detail(request, username=None):
         albums = Albums.objects.filter(published="PUBLIC")
 
     context = {
+        "profile": profile,
         "albums": albums,
         "photos": photos
     }
@@ -55,6 +61,7 @@ def albums_view(request, username=None):
         if username == "":
             return redirect("home")
 
+    profile = get_object_or_404(ImagerProfile, user__username=username)
     albums = Albums.objects.filter(user__username=username)
     photos = Photo.objects.filter(product__user__username=username)
 
@@ -63,6 +70,7 @@ def albums_view(request, username=None):
         albums = Albums.objects.filter(published="PUBLIC")
 
     context = {
+        "profile": profile,
         "albums": albums,
         "photos": photos
     }
@@ -79,6 +87,7 @@ def photo_view_detail(request, username=None):
         if username == "":
             return redirect("home")
 
+    profile = get_object_or_404(ImagerProfile, user__username=username)
     albums = Albums.objects.filter(user__username=username)
     photos = Photo.objects.filter(product__user__username=username)
 
@@ -87,6 +96,7 @@ def photo_view_detail(request, username=None):
         albums = Albums.objects.filter(published="PUBLIC")
 
     context = {
+        "profile": profile,
         "albums": albums,
         "photos": photos
     }
@@ -103,6 +113,7 @@ def photo_view(request, username=None):
         if username == "":
             return redirect("home")
 
+    profile = get_object_or_404(ImagerProfile, user__username=username)
     albums = Albums.objects.filter(user__username=username)
     photos = Photo.objects.filter(product__user__username=username)
 
@@ -111,9 +122,9 @@ def photo_view(request, username=None):
         albums = Albums.objects.filter(published="PUBLIC")
 
     context = {
+        "profile": profile,
         "albums": albums,
         "photos": photos
     }
 
     return render(request, "imager_profile/photo.html", context)
-
