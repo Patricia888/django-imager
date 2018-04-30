@@ -19,9 +19,12 @@
         {% if user.is_authenticated %}
         <li><a href="{% url "profile" %}">Profile</a></li>
         <li><a href="{% url "library" %}">Library</a></li>
+        <li><a href="{% url "photo" %}">Photos</a></li>
+        {% comment %}
         <li><a href="{% url "photo" photo_id=1 %}">Photos</a></li>
         <li><a href="{% url "albums" albums_id=1 %}">Albums</a></li>
-        <li><a href="">Products</a></li>
+        {% endcomment %}
+        <li><a href="{% url "albums"%}">Albums</a></li>
         {% if user.is_superuser %}
         <li><a href="{% url "admin:index" %}">Admin</a></li>
         {% endif %}
