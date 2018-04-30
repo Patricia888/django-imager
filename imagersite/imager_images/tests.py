@@ -3,7 +3,7 @@ from .models import User
 import factory
 
 from .models import Albums, Photo
-from imager_profile.models import ImagerProfile
+# from imager_profile.models import ImagerProfile
 from random import choice
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
@@ -52,17 +52,19 @@ class AlbumsFactory(factory.django.DjangoModelFactory):
     published = choice(['private', 'shared', 'public'])
 
 
-class ProfileFactory(factory.django.DjangoModelFactory):
-    """Creates Profile for users ImagerProfile."""
-    class Meta:
-        model = ImagerProfile
+# OBSOLETE
 
-    phone = factory.Faker('phone_number')
-    location = factory.Faker('street_address')
-    website = factory.Faker('uri')
-    fee = 45
-    bio = 'bio'
-    camera = 'dsr'
+# class ProfileFactory(factory.django.DjangoModelFactory):
+#     """Creates Profile for users ImagerProfile."""
+#     class Meta:
+#         model = ImagerProfile
+
+#     phone = factory.Faker('phone_number')
+#     location = factory.Faker('street_address')
+#     website = factory.Faker('uri')
+#     fee = 45
+#     bio = 'bio'
+#     camera = 'dsr'
 
 
 class ProfileUnitTests(TestCase):
@@ -74,8 +76,8 @@ class ProfileUnitTests(TestCase):
             user = UserFactory.create()
             user.set_password(factory.Faker('password'))
             user.save()
-            profile = ProfileFactory.create(user=user)
-            profile.save()
+            # profile = ProfileFactory.create(user=user)
+            # profile.save()
             photo = PhotoFactory.create(user=user)
             photo.save()
             albums = AlbumsFactory.create(user=user)

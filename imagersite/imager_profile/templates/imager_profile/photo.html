@@ -6,19 +6,21 @@
 {% if user.is_authenticated %}
 <section class="profile-container container">
   {% if user.first_name %}
-  <h3>{% trans "Welcome" %}, {{ user.username }}</h3>
+  <h3>{{ user.username }}</h3>
   {% endif %}
 
-  <h2>You're viewing the library for {{ profile.user.username }}</h2>
+  <h2>You're viewing the photos for {{ profile.user.username }}</h2>
 
   <section class="profile-info">
-    <h2>Profile Information</h2>
+    <h2>Phtoto Information</h2>
     {% if profile.user.username == user.username %}
     {% comment %}
     <a href="{% url "settings" username=user.username %}">{% trans "Edit Profile" %}</a>
     {% endcomment %}
-    <p>{% trans "Albums Created" %}: {{ profile.user.product }}</p>
-    <p>{% trans "Photos" %}: {{ profile.user.image }}</p>
+    <p>{% trans "Photos Title:" %}: {{ profile.user.title }}</p>
+    <p>{% trans "Photo:" %}: {{ profile.user.image }}</p>
+    <p>{% trans "Date Uploaded:" %}: {{ profile.user.date_uploaded }}</p>
+    <p>{% trans "Description:" %}: {{ profile.user.description }}</p>
     {% endif %}
   </section>
 

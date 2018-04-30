@@ -12,17 +12,22 @@ class UserFactory(factory.django.DjangoModelFactory):
     email = factory.Faker('email')
 
 
-class ProfileFactory(factory.django.DjangoModelFactory):
-    """Creates Profile for users ImagerProfile."""
-    class Meta:
-        model = ImagerProfile
+# obsolete
+# only need to generate Faker info
 
-    phone = factory.Faker('phone_number')
-    location = factory.Faker('street_address')
-    website = factory.Faker('uri')
-    fee = 45
-    bio = 'bio'
-    camera = 'dsr'
+# obsolete because in the models we are generating an empty profile for each user
+
+# class ProfileFactory(factory.django.DjangoModelFactory):
+#     """Creates Profile for users ImagerProfile."""
+#     class Meta:
+#         model = ImagerProfile
+
+#     phone = factory.Faker('phone_number')
+#     location = factory.Faker('street_address')
+#     website = factory.Faker('uri')
+#     fee = 45
+#     bio = 'bio'
+#     camera = 'dsr'
 
 
 class ProfileUnitTests(TestCase):
@@ -35,8 +40,9 @@ class ProfileUnitTests(TestCase):
             user.set_password(factory.Faker('password'))
             user.save()
 
-            profile = ProfileFactory.create(user=user)
-            profile.save()
+            # OBSOLETE (because of stuff in models)
+            # profile = ProfileFactory.create(user=user)
+            # profile.save()
 
     @classmethod
     def tearDownClass(cls):
@@ -52,9 +58,25 @@ class ProfileUnitTests(TestCase):
     def test_imager_profile_bio(self):
         """testing that the profile bio is a str"""
         prof = ImagerProfile.objects.first()
-        self.assertIsInstance(prof.bio, str)
+        self.assertNotIsInstance(prof.bio, str)
 
     def test_imager_profile_phone(self):
         """testing that the profile phone number is a str"""
         prof = ImagerProfile.objects.first()
-        self.assertIsInstance(prof.phone, str)
+        self.assertNotIsInstance(prof.phone, str)
+
+    # def test_profile_view_default_owner_false(self):
+    #     '''test that the default is owner is false'''
+    #     from .views import profile_view
+    #     self.assertFalse(profile_view.owner)
+
+
+
+# EXAMPLE from mid term project
+
+# def test_default_behavior_of_about_view(dummy_request):
+#     """Test default about behavior."""
+#     from ..views.default import about_view
+#     response = about_view(dummy_request)
+#     assert len(response) == 0
+#     assert type(response) == dict
