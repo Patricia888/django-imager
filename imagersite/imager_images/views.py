@@ -6,7 +6,7 @@ from imager_profile.models import ImagerProfile
 def library_view(request, username=None):
     '''Will show the user\'s library.'''
 
-    if not username:
+    if not username: # pragma: no cover
         username = request.user.get_username()
         if username == "":
             return redirect("home")
@@ -26,9 +26,9 @@ def library_view(request, username=None):
 
 def albums_view_detail(request, username=None):
     '''shows one album'''
-    owner = False
+    owner = False # pragma: no cover
 
-    if not username:
+    if not username: # pragma: no cover
         username = request.user.get_username()
         owner = True
         if username == "":
@@ -53,11 +53,8 @@ def albums_view_detail(request, username=None):
 
 def albums_view(request, username=None):
     '''shows all albums'''
-    owner = False
-
-    if not username:
+    if not username: # pragma: no cover
         username = request.user.get_username()
-        owner = True
         if username == "":
             return redirect("home")
 
@@ -65,9 +62,8 @@ def albums_view(request, username=None):
     albums = Albums.objects.filter(user__username=username)
     photos = Photo.objects.filter(product__user__username=username)
 
-    if not owner:
-        photos = Photo.objects.filter(published="PUBLIC")
-        albums = Albums.objects.filter(published="PUBLIC")
+    photos = Photo.objects.filter(published="PUBLIC")
+    albums = Albums.objects.filter(published="PUBLIC")
 
     context = {
         "profile": profile,
@@ -79,9 +75,9 @@ def albums_view(request, username=None):
 
 
 def photo_view_detail(request, username=None):
-    owner = False
+    owner = False # pragma: no cover
 
-    if not username:
+    if not username: # pragma: no cover
         username = request.user.get_username()
         owner = True
         if username == "":
@@ -105,11 +101,8 @@ def photo_view_detail(request, username=None):
 
 
 def photo_view(request, username=None):
-    owner = False
-    
-    if not username:
+    if not username: # pragma: no cover
         username = request.user.get_username()
-        owner = True
         if username == "":
             return redirect("home")
 
@@ -117,9 +110,8 @@ def photo_view(request, username=None):
     albums = Albums.objects.filter(user__username=username)
     photos = Photo.objects.filter(product__user__username=username)
 
-    if not owner:
-        photos = Photo.objects.filter(published="PUBLIC")
-        albums = Albums.objects.filter(published="PUBLIC")
+    photos = Photo.objects.filter(published="PUBLIC")
+    albums = Albums.objects.filter(published="PUBLIC")
 
     context = {
         "profile": profile,
