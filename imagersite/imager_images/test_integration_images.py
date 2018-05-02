@@ -107,7 +107,7 @@ class TestProfileRoutes(TestCase):
 
         albums = response.context['profile']
         self.assertEqual(albums.user_id, 1)
-   
+
     def test_only_public_photos_are_shown(self):
         user = User.objects.first()
         photo = Albums.objects.first()
