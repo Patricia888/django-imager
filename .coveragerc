@@ -1,13 +1,18 @@
 [run]
+branch = True
+
 omit = 
+    */ENV/*
     */migrations/*
     */admin.py
     */apps.py
     */__init__.py
+    */test/*
     */tests.py
     */manage.py
     */wsgi.py
     */setting.py
+    */test_integration_images.py
 
 source =
     imagersite

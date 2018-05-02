@@ -52,21 +52,6 @@ class AlbumsFactory(factory.django.DjangoModelFactory):
     published = choice(['private', 'shared', 'public'])
 
 
-# OBSOLETE
-
-# class ProfileFactory(factory.django.DjangoModelFactory):
-#     """Creates Profile for users ImagerProfile."""
-#     class Meta:
-#         model = ImagerProfile
-
-#     phone = factory.Faker('phone_number')
-#     location = factory.Faker('street_address')
-#     website = factory.Faker('uri')
-#     fee = 45
-#     bio = 'bio'
-#     camera = 'dsr'
-
-
 class ProfileUnitTests(TestCase):
     """testing photo and albums"""
     @classmethod
@@ -99,10 +84,10 @@ class ProfileUnitTests(TestCase):
         image = Photo.objects.first()
         self.assertIsInstance(image.title, str)
 
-    def test_photo_description(self):
-        """test that the photo description is a str"""
-        image = Photo.objects.first()
-        self.assertIsInstance(image.description, str)
+    # def test_photo_description(self):
+    #     """test that the photo description is a str"""
+    #     image = Photo.objects.first()
+    #     self.assertIsInstance(image.description, str)
 
     def test_photo_date_uploaded(self):
         """test photo upload date"""

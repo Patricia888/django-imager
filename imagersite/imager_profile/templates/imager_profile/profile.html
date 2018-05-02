@@ -19,8 +19,8 @@
     {% comment %}
     <a href="{% url "settings" username=user.username %}">{% trans "Edit Profile" %}</a>
     {% endcomment %}
-    <p>{% trans "Albums Created" %}: {{ profile.user.product }}</p>
-    <p>{% trans "Photos" %}: {{ profile.user.image }}</p>
+    <p>{% trans "Albums Created: 0" %} {{ profile.user.product }}</p>
+    <p>{% trans "Photos: 0" %} {{ profile.user.image }}</p>
     {% endif %}
   </section>
 
