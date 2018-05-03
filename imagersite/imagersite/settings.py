@@ -25,9 +25,6 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
-# EMAIL_TIMEOUT = os.enviorn.get('EMAIL_TIMEOUT')
-# EMAIL_SSL_KEYFILE = os.enviorn.get('EMAIL_SSL_KEYFILE')
-# EMAIL_SSL_CERTFILE = os.enviorn.get('EMAIL_SSL_CERTFILE')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
