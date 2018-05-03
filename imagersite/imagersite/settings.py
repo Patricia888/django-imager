@@ -11,10 +11,23 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from django.core.mail import send_mail
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = os.enviorn.get('EMAIL_HOST', '')
+EMAIL_HOST_USER = os.enviorn.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.enviorn.get('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+# EMAIL_TIMEOUT = os.enviorn.get('EMAIL_TIMEOUT')
+# EMAIL_SSL_KEYFILE = os.enviorn.get('EMAIL_SSL_KEYFILE')
+# EMAIL_SSL_CERTFILE = os.enviorn.get('EMAIL_SSL_CERTFILE')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
