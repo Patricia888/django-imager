@@ -9,7 +9,8 @@ class Albums(models.Model):
     Albums is truncated if user is deleted from table.
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='albums')
-    cover = models.ImageField(upload_to='../MEDIA/images', null=True)
+    photos = models.ManyToManyField('Photo', related_name='albums')
+    cover = models.ForeignKey('Photo', on_delete=models.SET_NULL, related_name='+', null=True, blank=True)
     title = models.CharField(max_length=180, default='Untitled')
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
@@ -36,7 +37,6 @@ class Photo(models.Model):
     tables to build assocation stream.
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='photos')
-    albums = models.ForeignKey(Albums, on_delete=models.CASCADE, related_name='photos', null=True, blank=True)
     image = ImageField(upload_to='images')
     title = models.CharField(max_length=250, default='Untitled')
     description = models.TextField(blank=True, null=True)

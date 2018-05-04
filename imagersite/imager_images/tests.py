@@ -45,7 +45,7 @@ class AlbumsFactory(factory.django.DjangoModelFactory):
         model = Albums
 
     title = factory.Faker('name')
-    description = factory.Faker('sentence')
+    description = factory.Faker('name')
     date_created = factory.Faker('date')
     date_modified = factory.Faker('date')
     date_published = factory.Faker('date')

@@ -14,10 +14,12 @@
 
   <section class="profile-info">
     <h2>Phtoto Information</h2>
-    {% if Photo.image %}
-    {% for albums in Photo %}
+    {% if user.photos %}
+    {% for photo in user.photos.all %}
     <p>{% trans "Photos Title" %}: {{ photo.title }}</p>
-    <p>{% trans "Photo" %}: {{ photo.image }}</p>
+    {% thumbnail photo.image "x200" as im %}    
+    <img src="{{ im.url }}">
+    {% endthumbnail %}
     <p>{% trans "Date Uploaded" %}: {{ photo.date_uploaded }}</p>
     <p>{% trans "Description" %}: {{ photo.description }}</p>
     {% endfor %}
