@@ -13,7 +13,7 @@ def library_view(request, username=None):
 
     profile = get_object_or_404(ImagerProfile, user__username=username)
     albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(product__user__username=username)
+    photos = Photo.objects.filter(albums__user__username=username)
 
     context = {
         "profile": profile,
@@ -36,7 +36,7 @@ def albums_view_detail(request, username=None):
 
     profile = get_object_or_404(ImagerProfile, user__username=username)
     albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(product__user__username=username)
+    photos = Photo.objects.filter(albums__user__username=username)
 
     if not owner:
         photos = Photo.objects.filter(published="PUBLIC")
@@ -60,7 +60,7 @@ def albums_view(request, username=None):
 
     profile = get_object_or_404(ImagerProfile, user__username=username)
     albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(product__user__username=username)
+    photos = Photo.objects.filter(albums__user__username=username)
 
     photos = Photo.objects.filter(published="PUBLIC")
     albums = Albums.objects.filter(published="PUBLIC")
@@ -85,7 +85,7 @@ def photo_view_detail(request, username=None):
 
     profile = get_object_or_404(ImagerProfile, user__username=username)
     albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(product__user__username=username)
+    photos = Photo.objects.filter(albums__user__username=username)
 
     if not owner:
         photos = Photo.objects.filter(published="PUBLIC")
@@ -108,7 +108,7 @@ def photo_view(request, username=None):
 
     profile = get_object_or_404(ImagerProfile, user__username=username)
     albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(product__user__username=username)
+    photos = Photo.objects.filter(albums__user__username=username)
 
     photos = Photo.objects.filter(published="PUBLIC")
     albums = Albums.objects.filter(published="PUBLIC")

@@ -36,7 +36,7 @@ class Photo(models.Model):
     tables to build assocation stream.
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='photos')
-    product = models.ForeignKey(Albums, on_delete=models.CASCADE, related_name='photos', null=True, blank=True)
+    albums = models.ForeignKey(Albums, on_delete=models.CASCADE, related_name='photos', null=True, blank=True)
     image = ImageField(upload_to='images')
     title = models.CharField(max_length=250, default='Untitled')
     description = models.TextField(blank=True, null=True)

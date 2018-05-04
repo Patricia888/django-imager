@@ -15,7 +15,7 @@
   <section class="profile-info">
     <h2>Phtoto Information</h2>
     {% if Photo.image %}
-    {% for product in Photo %}
+    {% for albums in Photo %}
     <p>{% trans "Photos Title" %}: {{ photo.title }}</p>
     <p>{% trans "Photo" %}: {{ photo.image }}</p>
     <p>{% trans "Date Uploaded" %}: {{ photo.date_uploaded }}</p>

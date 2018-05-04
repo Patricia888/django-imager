@@ -17,7 +17,7 @@
     {% comment %}
     <a href="{% url "settings" username=user.username %}">{% trans "Edit Profile" %}</a>
     {% endcomment %}
-    <p>{% trans "Albums Created" %}: {{ profile.user.product }}</p>
+    <p>{% trans "Albums Created" %}: {{ profile.user.albums }}</p>
     <p>{% trans "Photos" %}: {{ profile.user.image }}</p>
 
     {% if photo %}
@@ -30,7 +30,7 @@
     {% endif %}
   </section>
 
-  <!-- Handle the Product and Photo context that was passed from the view -->
+  <!-- Handle the albums and Photo context that was passed from the view -->
 
 </section>
 {% else %}

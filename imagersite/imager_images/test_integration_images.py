@@ -17,10 +17,10 @@ class TestProfileRoutes(TestCase):
             user = mommy.make(User)
             user.set_password('password')
             user.save()
-            product = mommy.make(Albums, user=user)
+            albums = mommy.make(Albums, user=user)
             mommy.make(
                 Photo,
-                product=product,
+                albums=albums,
                 image=tempfile.NamedTemporaryFile(suffix='.png').name)
 
     @classmethod
