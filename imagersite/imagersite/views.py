@@ -3,6 +3,7 @@ from imager_images.models import Photo
 
 
 class HomeView(TemplateView):
+    """Routes user to home(index.html) view page."""
     template_name = 'generic/home.html'
 
     def get_context_data(self, **kwargs):
@@ -18,7 +19,6 @@ class HomeView(TemplateView):
             image_title = 'Placeholder'
 
         context['image_url'] = image_url
-        # context['image_title'] = image_title
         context['message'] = 'Hello World'
 
         return context
