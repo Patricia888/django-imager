@@ -6,6 +6,7 @@ from django.conf import settings
 
 
 class LibraryView(ListView):
+    """Displays user's Library view."""
     template_name = 'imager_profile/library.html'
     context_object_name = 'albums'
 
@@ -26,7 +27,7 @@ class LibraryView(ListView):
 
 
 def albums_view_detail(request, username=None):
-    '''shows an album's view.'''
+    """Displays an album's view."""
     owner = False # pragma: no cover
 
     if not username: # pragma: no cover
@@ -52,27 +53,22 @@ def albums_view_detail(request, username=None):
     return render(request, "imager_profile/albums.html", context)
 
 
-def albums_view(request, username=None):
-    '''shows all albums'''
-    if not username: # pragma: no cover
-        username = request.user.get_username()
-        if username == "":
-            return redirect("home")
+class AlbumsView(ListView):
+    """Displays all albums from users account."""
+    template_name = 'imager_profile/albums.html'
+    context_object_name = 'albums'
 
-    profile = get_object_or_404(ImagerProfile, user__username=username)
-    albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(albums__user__username=username)
+    def get(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return redirect('home')
+        return super().get(*args, **kwargs)
 
-    photos = Photo.objects.filter(published="PUBLIC")
-    albums = Albums.objects.filter(published="PUBLIC")
+    def get_queryset(self):
+        return Albums.objects.filter(published='PUBLIC')
 
-    context = {
-        "profile": profile,
-        "albums": albums,
-        "photos": photos
-    }
-
-    return render(request, "imager_profile/albums.html", context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 def photo_view_detail(request, username=None):
@@ -102,13 +98,13 @@ def photo_view_detail(request, username=None):
 
 
 class PhotoView(ListView):
+    """Displays all images from users account."""
     template_name = 'imager_profile/photo.html'
     context_object_name = 'photo'
 
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
             return redirect('home')
-
         return super().get(*args, **kwargs)
 
     def get_queryset(self):
@@ -116,5 +112,4 @@ class PhotoView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         return context
