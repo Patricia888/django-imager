@@ -5,13 +5,13 @@
 {% block content %}
 <div class="albums-detail-container container">
   {% if albums %}
-  <h2>{{ albums.name }} (by: {{ albums.user.username }})</h2>
+  <h2>{{ albums.title }} (by: {{ albums.user.username }})</h2>
   <p>{{ albums.description }}</p>
 
   <div class="detail-cover">
     {% if albums.cover %}
       {% thumbnail albums.cover "150x150" crop="center" as im %}
-      <img src="{{ im.url }}" alt="albums.name">
+      <img src="{{ im.url }}" alt="albums.title">
       {% endthumbnail %}
       {% else %}
       <p>No Cover Photo</p>
