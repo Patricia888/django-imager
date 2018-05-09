@@ -39,12 +39,12 @@ def settings_view(request, username=None):
 
 # profile class
 class ProfileView(DetailView):
+    """ Show user profile. Hides or shows depending on if the user is looking at their own profile or another user's profile. """
     template_name = 'imager_profile/profile.html'
     slug_url_kwarg = 'username'
     slug_field = 'user__username'
     model = ImagerProfile
     context_object_name = 'profile'
-
 
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
