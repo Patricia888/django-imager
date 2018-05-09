@@ -14,22 +14,24 @@
 
   <section class="profile-info">
     <h2>Phtoto Information</h2>
-    {% if user.photos %}
-    {% for photo in user.photos.all %}
-    <p>{% trans "Photos Title" %}: {{ photo.title }}</p>
-    {% thumbnail photo.image "x200" as im %}    
-    <img src="{{ im.url }}">
-    {% endthumbnail %}
-    <p>{% trans "Date Uploaded" %}: {{ photo.date_uploaded }}</p>
-    <p>{% trans "Description" %}: {{ photo.description }}</p>
+
+    {% for pic in photo %}
+    <a href="{% url "photo_view_detail" pk=pic.id %}">
+
+      <p>{% trans "Photos Title" %}: {{ pic.title }}</p>
+      {% thumbnail pic.image "x200" as im %}
+      <img src="{{ im.url }}">
+      {% endthumbnail %}
+      <p>{% trans "Date Uploaded" %}: {{ pic.date_uploaded }}</p>
+      <p>{% trans "Description" %}: {{ pic.description }}</p>
+    </a>
     {% endfor %}
 
-    {% else %}
-    <img src="{% static 'flowers.jpg' %}" alt="Flowers"/>
+
 
   </section>
-  {% endif %}
-  {% endif %}
+
+{% endif %}
 
 </section>
 {% endblock content %}

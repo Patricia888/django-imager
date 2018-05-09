@@ -1,0 +1,25 @@
+{% extends "generic/base.html" %}
+{% load thumbnail %}
+{% load i18n %}
+
+{% block content %}
+<div class="photo-detail-container container">
+  {% if photo %}
+  <h2>{{ photo.name }} (by: {{ photo.user.username }})</h2>
+  <p>{{ photo.description }}</p>
+  <div class="detail-photos">
+    {% for photo in photos %}
+    <span class="photo-thumb" style="display: inline-block;">
+      {% thumbnail photo.image "150x150" crop="center" as im %}
+      <img src="{{ im.url }}" alt="{{ photo.name }}">
+      <p>{{ photo.description }}</p>
+      {% endthumbnail %}
+      </span>
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <h2>Keyboard Driver Error.</h2>
+  {% endif %}
+</div>
+{% endblock content %}
