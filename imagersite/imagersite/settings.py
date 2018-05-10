@@ -157,7 +157,7 @@ SASS_PROCESSOR_CUSTOM_FUNCTIONS = {
 
 NODE_MODULES_URL = STATIC_URL + 'node_modules/'
 
-STATICFILES_STORAGE = 'sass_processor.storage.SassS3Boto3Storage'
+# STATICFILES_STORAGE = 'sass_processor.storage.SassS3Boto3Storage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
