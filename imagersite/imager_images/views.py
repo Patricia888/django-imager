@@ -45,7 +45,7 @@ class AlbumsView(ListView):
 
 
 class AlbumsViewDetail(DetailView):
-    """Displays all albums from users account."""
+    """Displays detail on an album from users account."""
     template_name = 'imager_profile/albums_view_detail.html'
     context_object_name = 'albums'
 
@@ -75,9 +75,10 @@ class PhotoView(ListView):
 
 
 class PhotoViewDetail(DetailView):
-    """Displays all albums from users account."""
+    """Displays detail on a photo from users account."""
     template_name = 'imager_profile/photo_view_detail.html'
     context_object_name = 'photo'
+    # pk_url_kwarg = 'pk'
 
     def get(self, *args, **kwargs):
         return super().get(*args, **kwargs)
@@ -104,8 +105,16 @@ class PhotoViewDetail(DetailView):
 #     model = Photo
 
 #     def get(self, *args, **kwargs):
+#         if not self.request.user.is_authenticated:
+#             return redirect('home')
+
+#         return super().get(*args, **kwargs)
         
 #     def post(self, *args, **kwargs):
+#         if not self.request.user.is_authenticated:
+#             return redirect('home')
+
+#         return super().get(*args, **kwargs)
        
 #     def get_form_kwargs(self):
                

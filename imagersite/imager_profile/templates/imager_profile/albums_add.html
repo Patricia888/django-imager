@@ -4,7 +4,13 @@
 
 {% block content %}
 
-
-
+<div class="photo-or-album-add container">
+    <h2>Add a new Album</h2>
+    <form class="add-form" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add</button>
+    </form>
+</div>
 
 {% endblock content %}
