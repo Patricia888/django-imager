@@ -26,9 +26,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
 SECRET_KEY = os.environ.get('SECRET_KEY', None)
 
 DEBUG = os.environ.get('DEBUG', False)
