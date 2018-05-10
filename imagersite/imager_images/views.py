@@ -86,28 +86,26 @@ class PhotoViewDetail(DetailView):
         return Photo.objects.filter(id=self.kwargs['pk'])
 
 
-class AlbumsAddView(CreateView):
-    """  """
-    template_name = 'imager_profile/albums_add.html'
-    model =
+# class AlbumsAddView(CreateView):
+#     """  """
+#     template_name = 'imager_profile/albums_add.html'
+#     model = Albums
 
-    def get(self, *args, **kwargs):
+#     def get(self, *args, **kwargs):
 
-    def post(self, *args, **kwargs):
+#     def post(self, *args, **kwargs):
 
-    def get_form_kwargs(self):
+#     def get_form_kwargs(self):
 
 
-class PhotoAddView(CreateView):
-    """  """
-    template_name = 'imager_profile/photo_add.html'
-    model = Photo
+# class PhotoAddView(CreateView):
+#     """  """
+#     template_name = 'imager_profile/photo_add.html'
+#     model = Photo
 
-    def get(self, *args, **kwargs):
+#     def get(self, *args, **kwargs):
         
-
-    def post(self, *args, **kwargs):
+#     def post(self, *args, **kwargs):
        
-
-    def get_form_kwargs(self):
+#     def get_form_kwargs(self):
                
