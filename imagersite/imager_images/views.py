@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, CreateView, DetailView
 from imager_images.models import Albums, Photo
 from imager_profile.models import ImagerProfile
@@ -109,12 +109,11 @@ class PhotoViewDetail(DetailView):
 #             return redirect('home')
 
 #         return super().get(*args, **kwargs)
-        
+
 #     def post(self, *args, **kwargs):
 #         if not self.request.user.is_authenticated:
 #             return redirect('home')
 
 #         return super().get(*args, **kwargs)
-       
+
 #     def get_form_kwargs(self):
-               
