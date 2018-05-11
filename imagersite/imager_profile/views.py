@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from imager_images.models import Albums, Photo
 from .models import ImagerProfile
 from django.views.generic import DetailView

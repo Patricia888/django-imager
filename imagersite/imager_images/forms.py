@@ -25,4 +25,4 @@ class AlbumsForm(ModelForm):
         super().__init__(*args, **kwargs)
 
         self.fields['cover'].queryset = Albums.objects.filter(
-                                        albums__user__username=username)
+                                        user__username=username)

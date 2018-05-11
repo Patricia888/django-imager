@@ -2,6 +2,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic.edit import FormView
 from imager_images.models import Albums, Photo
 from imager_profile.models import ImagerProfile
 from .forms import PhotoForm, AlbumsForm
@@ -81,7 +82,6 @@ class PhotoViewDetail(DetailView):
     """Displays detail on a photo from users account."""
     template_name = 'imager_profile/photo_view_detail.html'
     context_object_name = 'photo'
-    # pk_url_kwarg = 'pk'
 
     def get(self, *args, **kwargs):
         return super().get(*args, **kwargs)
@@ -95,7 +95,7 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
     template_name = 'imager_profile/photo_add.html'
     login_url = reverse_lazy('auth_login')
     form_class = PhotoForm
-    success_url = 'photo'
+    success_url = reverse_lazy('library')
     model = Photo
 
     def get_form_kwargs(self):
@@ -113,7 +113,7 @@ class AlbumsCreateView(LoginRequiredMixin, CreateView):
     template_name = 'imager_profile/albums_add.html'
     login_url = reverse_lazy('auth_login')
     form_class = AlbumsForm
-    success_url = 'albums'
+    success_url = reverse_lazy('albums')
     model = Albums
 
     def get_form_kwargs(self):
