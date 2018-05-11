@@ -3,11 +3,12 @@ from .models import User
 import factory
 
 from .models import Albums, Photo
-# from imager_profile.models import ImagerProfile
+from django.test import override_settings
 from random import choice
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
 import os
+import shutil
 
 
 class UserFactory(factory.django.DjangoModelFactory):
@@ -55,14 +56,14 @@ class AlbumsFactory(factory.django.DjangoModelFactory):
 class ProfileUnitTests(TestCase):
     """testing photo and albums"""
     @classmethod
+    @override_settings(MEDIA_ROOT=os.path.join(settings.BASE_DIR, "generated_images"))
     def setUpClass(cls):
         super(TestCase, cls)
+        os.mkdir(os.path.join(settings.BASE_DIR, "generated_images"))
         for _ in range(50):
             user = UserFactory.create()
             user.set_password(factory.Faker('password'))
             user.save()
-            # profile = ProfileFactory.create(user=user)
-            # profile.save()
             photo = PhotoFactory.create(user=user)
             photo.save()
             albums = AlbumsFactory.create(user=user)
@@ -73,6 +74,7 @@ class ProfileUnitTests(TestCase):
         '''tear down fake database'''
         super(TestCase, cls)
         User.objects.all().delete()
+        shutil.rmtree(os.path.join(settings.BASE_DIR, "generated_images"))
 
     def test_one_photo(self):
         """test photo is there when it is there"""

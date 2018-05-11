@@ -52,12 +52,11 @@ class AlbumsViewDetail(DetailView):
     """Displays detail on an album from users account."""
     template_name = 'imager_profile/albums_view_detail.html'
     context_object_name = 'albums'
+    pk_url_kwargs = 'id'
+    model = Albums
 
     def get(self, *args, **kwargs):
         return super().get(*args, **kwargs)
-
-    def get_queryset(self):
-        return Albums.objects.filter(id=self.kwargs['id'].first())
 
 
 class PhotoView(ListView):

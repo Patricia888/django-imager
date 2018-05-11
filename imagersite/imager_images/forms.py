@@ -24,5 +24,5 @@ class AlbumsForm(ModelForm):
         username = kwargs.pop('username')
         super().__init__(*args, **kwargs)
 
-        self.fields['cover'].queryset = Albums.objects.filter(
+        self.fields['cover'].queryset = Photo.objects.filter(
                                         user__username=username)
