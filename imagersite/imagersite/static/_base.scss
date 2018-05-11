@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 
-* {
+header {
     background-color: lightblue;
 }
 
@@ -43,6 +43,8 @@ form input {
     background-color: grey;
 }
 
-img {
-    margin-left: 61px;
+#defaultimg {
+    width: 700px;
+    float: left;
+    padding: 15px;
 }

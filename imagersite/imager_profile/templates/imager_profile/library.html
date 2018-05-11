@@ -13,12 +13,14 @@
 
   <section class="profile-info">
     <h2>Library Information</h2>
-    {% if profile.user.username == user.username %}
+    {% if user.username %}
+    <button><a href="{% url 'albums_create' %}">Add Album</a></button>
+    <button><a href="{% url 'photo_create' %}">Add Photo</a></button>
+    
     {% comment %}
-    <a href="{% url "settings" username=user.username %}">{% trans "Edit Profile" %}</a>
+    <p>{% trans "Albums Created" %}: {{ priv_albums.count }}</p>
+    <p>{% trans "Photos" %}: {{ priv_photos.count }}</p>
     {% endcomment %}
-    <p>{% trans "Albums Created" %}: {{ profile.user.albums }}</p>
-    <p>{% trans "Photos" %}: {{ profile.user.image }}</p>
 
     {% if photo %}
     {% for picture in photo %}
@@ -29,8 +31,6 @@
     {% endif %}
     {% endif %}
   </section>
-
-  <!-- Handle the albums and Photo context that was passed from the view -->
 
 </section>
 {% else %}

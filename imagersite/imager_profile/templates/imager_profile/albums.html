@@ -13,13 +13,18 @@
 
   <section class="profile-info">
     <h2>Album Information</h2>
-    {% if user.albums %}
-    {% for al in user.albums.all %}
-    <p>{% trans "Albums title" %}: {{ profile.user.title }}</p>
-    {% thumbnail albums.cover "x250" as im %}
-    <img src="{{ im.url }}">
-    {% endthumbnail %}
-    <p>{% trans "Description" %}: {{ albums.description }}</p>
+    {% if albums %}
+    {% for collection in albums %}
+
+    <fieldset>
+      <legend>{{ collection.title }}</legend>
+      {% thumbnail collection.cover.image "300x200" as image %}
+      <a href="{% url 'albums_view_detail' pk=collection.id %}">
+          <img src="{{image.url}}">
+      </a>
+      {% endthumbnail %}
+    </fieldset>
+    <p>{% trans "Description" %}: {{ collection.description }}</p>
     {% endfor %}
     {% endif %}
   </section>

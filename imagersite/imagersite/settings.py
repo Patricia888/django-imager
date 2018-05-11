@@ -26,15 +26,11 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
 SECRET_KEY = os.environ.get('SECRET_KEY', None)
 
 DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split()
-
 
 # Application definition
 
@@ -50,6 +46,7 @@ INSTALLED_APPS = [
     'imager_profile',
     'imager_images',
     'registration',
+    'sass_processor',
 ]
 
 MIDDLEWARE = [
@@ -140,6 +137,24 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+
+SASS_PROCESSOR_AUTO_INCLUDE = False
+SASS_PRECISION = 8
+SASS_OUTPUT_STYLE = 'compact'
+
+
+STATICFILES_DIRS = [
+    ('node_modules', '../node_modules/'),
+]
+
+# put vars here
+SASS_PROCESSOR_CUSTOM_FUNCTIONS = {
+    # 'get-color': 'myproject.utils.get_color',
+}
+
+NODE_MODULES_URL = STATIC_URL + 'node_modules/'
+
+# STATICFILES_STORAGE = 'sass_processor.storage.SassS3Boto3Storage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')

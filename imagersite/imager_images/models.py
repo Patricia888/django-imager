@@ -28,7 +28,7 @@ class Albums(models.Model):
 
     def __str__(self):
         """Returns representation of current Album title."""
-        return '{}'.format(self.name)
+        return '{}'.format(self.title)
 
 
 class Photo(models.Model):

@@ -1,7 +1,11 @@
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic.edit import FormView
 from imager_images.models import Albums, Photo
 from imager_profile.models import ImagerProfile
+from .forms import PhotoForm, AlbumsForm
 from django.conf import settings
 
 
@@ -45,15 +49,14 @@ class AlbumsView(ListView):
 
 
 class AlbumsViewDetail(DetailView):
-    """Displays all albums from users account."""
+    """Displays detail on an album from users account."""
     template_name = 'imager_profile/albums_view_detail.html'
     context_object_name = 'albums'
+    pk_url_kwargs = 'id'
+    model = Albums
 
     def get(self, *args, **kwargs):
         return super().get(*args, **kwargs)
-
-    def get_queryset(self):
-        return Albums.objects.filter(id=self.kwargs['id'].first())
 
 
 class PhotoView(ListView):
@@ -75,7 +78,7 @@ class PhotoView(ListView):
 
 
 class PhotoViewDetail(DetailView):
-    """Displays all albums from users account."""
+    """Displays detail on a photo from users account."""
     template_name = 'imager_profile/photo_view_detail.html'
     context_object_name = 'photo'
 
@@ -84,3 +87,39 @@ class PhotoViewDetail(DetailView):
 
     def get_queryset(self):
         return Photo.objects.filter(id=self.kwargs['pk'])
+
+
+class PhotoCreateView(LoginRequiredMixin, CreateView):
+    """DOCSTRING"""
+    template_name = 'imager_profile/photo_add.html'
+    login_url = reverse_lazy('auth_login')
+    form_class = PhotoForm
+    success_url = reverse_lazy('library')
+    model = Photo
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'username': self.request.user.username})
+        return kwargs
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class AlbumsCreateView(LoginRequiredMixin, CreateView):
+    """DOCSTRING"""
+    template_name = 'imager_profile/albums_add.html'
+    login_url = reverse_lazy('auth_login')
+    form_class = AlbumsForm
+    success_url = reverse_lazy('albums')
+    model = Albums
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'username': self.request.user.username})
+        return kwargs
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
