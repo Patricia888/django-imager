@@ -1,122 +1,86 @@
 from django.shortcuts import redirect, render, get_object_or_404
+from django.views.generic import ListView, CreateView, DetailView
 from imager_images.models import Albums, Photo
 from imager_profile.models import ImagerProfile
+from django.conf import settings
 
 
-def library_view(request, username=None):
-    '''Will show the user\'s library.'''
+class LibraryView(ListView):
+    """Displays user's Library view."""
+    template_name = 'imager_profile/library.html'
+    context_object_name = 'albums'
 
-    if not username: # pragma: no cover
-        username = request.user.get_username()
-        if username == "":
-            return redirect("home")
+    def get(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return redirect('home')
 
-    profile = get_object_or_404(ImagerProfile, user__username=username)
-    albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(albums__user__username=username)
+        return super().get(*args, **kwargs)
 
-    context = {
-        "profile": profile,
-        "albums": albums,
-        "photos": photos,
-    }
+    def get_queryset(self):
+        return Albums.objects.filter(user__username=self.request.user.username)
 
-    return render(request, "imager_profile/library.html", context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cover'] = settings.STATIC_URL + 'default_cover.thumbnail'
 
-
-def albums_view_detail(request, username=None):
-    '''shows one album'''
-    owner = False # pragma: no cover
-
-    if not username: # pragma: no cover
-        username = request.user.get_username()
-        owner = True
-        if username == "":
-            return redirect("home")
-
-    profile = get_object_or_404(ImagerProfile, user__username=username)
-    albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(albums__user__username=username)
-
-    if not owner:
-        photos = Photo.objects.filter(published="PUBLIC")
-        albums = Albums.objects.filter(published="PUBLIC")
-
-    context = {
-        "profile": profile,
-        "albums": albums,
-        "photos": photos
-    }
-
-    return render(request, "imager_profile/albums.html", context)
+        return context
 
 
-def albums_view(request, username=None):
-    '''shows all albums'''
-    if not username: # pragma: no cover
-        username = request.user.get_username()
-        if username == "":
-            return redirect("home")
+class AlbumsView(ListView):
+    """Displays all albums from users account."""
+    template_name = 'imager_profile/albums.html'
+    context_object_name = 'albums'
 
-    profile = get_object_or_404(ImagerProfile, user__username=username)
-    albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(albums__user__username=username)
+    def get(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return redirect('home')
+        return super().get(*args, **kwargs)
 
-    photos = Photo.objects.filter(published="PUBLIC")
-    albums = Albums.objects.filter(published="PUBLIC")
+    def get_queryset(self):
+        return Albums.objects.filter(published='PUBLIC')
 
-    context = {
-        "profile": profile,
-        "albums": albums,
-        "photos": photos
-    }
-
-    return render(request, "imager_profile/albums.html", context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
-def photo_view_detail(request, username=None):
-    owner = False # pragma: no cover
+class AlbumsViewDetail(DetailView):
+    """Displays all albums from users account."""
+    template_name = 'imager_profile/albums_view_detail.html'
+    context_object_name = 'albums'
 
-    if not username: # pragma: no cover
-        username = request.user.get_username()
-        owner = True
-        if username == "":
-            return redirect("home")
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs)
 
-    profile = get_object_or_404(ImagerProfile, user__username=username)
-    albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(albums__user__username=username)
-
-    if not owner:
-        photos = Photo.objects.filter(published="PUBLIC")
-        albums = Albums.objects.filter(published="PUBLIC")
-
-    context = {
-        "profile": profile,
-        "albums": albums,
-        "photos": photos
-    }
-
-    return render(request, "imager_profile/photo.html", context)
+    def get_queryset(self):
+        return Albums.objects.filter(id=self.kwargs['id'].first())
 
 
-def photo_view(request, username=None):
-    if not username: # pragma: no cover
-        username = request.user.get_username()
-        if username == "":
-            return redirect("home")
+class PhotoView(ListView):
+    """Displays all images from users account."""
+    template_name = 'imager_profile/photo.html'
+    context_object_name = 'photo'
 
-    profile = get_object_or_404(ImagerProfile, user__username=username)
-    albums = Albums.objects.filter(user__username=username)
-    photos = Photo.objects.filter(albums__user__username=username)
+    def get(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return redirect('home')
+        return super().get(*args, **kwargs)
 
-    photos = Photo.objects.filter(published="PUBLIC")
-    albums = Albums.objects.filter(published="PUBLIC")
+    def get_queryset(self):
+        return Photo.objects.filter(published='PUBLIC')
 
-    context = {
-        "profile": profile,
-        "albums": albums,
-        "photos": photos
-    }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
-    return render(request, "imager_profile/photo.html", context)
+
+class PhotoViewDetail(DetailView):
+    """Displays all albums from users account."""
+    template_name = 'imager_profile/photo_view_detail.html'
+    context_object_name = 'photo'
+
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs)
+
+    def get_queryset(self):
+        return Photo.objects.filter(id=self.kwargs['pk'])

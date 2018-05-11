@@ -1,0 +1,35 @@
+{% extends "generic/base.html" %}
+{% load thumbnail %}
+{% load i18n %}
+
+{% block content %}
+<div class="albums-detail-container container">
+  {% if albums %}
+  <h2>{{ albums.name }} (by: {{ albums.user.username }})</h2>
+  <p>{{ albums.description }}</p>
+
+  <div class="detail-cover">
+    {% if albums.cover %}
+      {% thumbnail albums.cover "150x150" crop="center" as im %}
+      <img src="{{ im.url }}" alt="albums.name">
+      {% endthumbnail %}
+      {% else %}
+      <p>No Cover Photo</p>
+      {% endif %}
+  </div>
+    <div class="detail-albums">
+      {% for photo in albums %}
+        <span class="photo-thumb" style="display: inline-block;">
+          {% thumbnail photo.image "150x150" crop="center" as im %}
+          <img src="{{ im.url }}" alt="photo.name">
+          <p>{{ photo.description }}</p>
+          {% endthumbnail %}
+        </span>
+      {% endfor %}
+    </div>
+
+  {% else %}
+  <h2>Keyboard Driver Error.</h2>
+  {% endif %}
+</div>
+{% endblock content %}
