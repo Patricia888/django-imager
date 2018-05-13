@@ -18,7 +18,7 @@
 
     <fieldset>
       <legend>{{ collection.title }}</legend>
-      {% thumbnail collection.cover.image "300x200" as image %}
+      {% thumbnail collection.cover.image "x200" as image %}
       <a href="{% url 'albums_view_detail' pk=collection.id %}">
           <img src="{{image.url}}">
       </a>

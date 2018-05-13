@@ -1,6 +1,7 @@
 {% extends "generic/base.html" %}
 {% load thumbnail %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
 
@@ -12,7 +13,7 @@
   <div class="detail-photos">
 
     <span class="photo-thumb" style="display: inline-block;">
-      {% thumbnail photo.image "150x150" crop="center" as im %}
+      {% thumbnail photo.image "x350" crop="center" as im %}
       <img src="{{ im.url }}" alt="{{ photo.title }}">
       <p>{{ photo.description }}</p>
       {% endthumbnail %}

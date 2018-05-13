@@ -1,6 +1,7 @@
 {% extends "generic/base.html" %}
 {% load thumbnail %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
 {% if user.is_authenticated %}
@@ -9,7 +10,7 @@
   <h3>{{ user.username }}</h3>
   {% endif %}
 
-  <h2>You're viewing the library for {{ profile.user.username }}</h2>
+  <h2>You're viewing the library for {{ user.username }}</h2>
 
   <section class="profile-info">
     <h2>Library Information</h2>
@@ -24,13 +25,18 @@
 
     {% if photo %}
     {% for picture in photo %}
-    {% thumbnail picture.image 200x200 as image %}
-        <img src "{{ img.url }}">
+    {% thumbnail picture.image "x200" as image %}
+        <img src "{{ image.url }}">
     {% endthumbnail %}
     {% endfor %}
     {% endif %}
+
     {% endif %}
   </section>
+
+
+
+
 
 </section>
 {% else %}
