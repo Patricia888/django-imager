@@ -90,7 +90,7 @@ class PhotoViewDetail(DetailView):
 
 
 class PhotoCreateView(LoginRequiredMixin, CreateView):
-    """DOCSTRING"""
+    """Lets a uer add a photo."""
     template_name = 'imager_profile/photo_add.html'
     login_url = reverse_lazy('auth_login')
     form_class = PhotoForm
@@ -108,7 +108,7 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
 
 
 class AlbumsCreateView(LoginRequiredMixin, CreateView):
-    """DOCSTRING"""
+    """Lets a user create an album."""
     template_name = 'imager_profile/albums_add.html'
     login_url = reverse_lazy('auth_login')
     form_class = AlbumsForm

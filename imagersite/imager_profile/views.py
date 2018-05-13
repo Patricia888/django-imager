@@ -51,6 +51,7 @@ class ProfileView(DetailView):
 
 
 class ProfileEditView(LoginRequiredMixin, UpdateView):
+    """Lets the user edit their profile."""
     template_name = 'imager_profile/profile_edit.html'
     model = ImagerProfile
     form_class = ProfileEditForm
