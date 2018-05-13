@@ -2,8 +2,8 @@
 {% load i18n %}
 
 {% block content %}
-<div class="profile-edit container">
-  <form class="profile-edit-form" method="POST">
+<div class="albums-edit container">
+  <form class="albums-edit-form" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Update</button>

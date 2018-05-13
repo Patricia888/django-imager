@@ -18,6 +18,7 @@
       <p>{{ photo.description }}</p>
       {% endthumbnail %}
       </span>
+      <button><a href="{% url 'photo_edit' pk=photo.id %}">Edit Photo</a></button>
       <p>{% trans "Date Uploaded" %}: {{ photo.date_uploaded }}</p>
       <p>{% trans "Description" %}: {{ photo.description }}</p>
  

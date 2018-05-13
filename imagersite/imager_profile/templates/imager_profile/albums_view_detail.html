@@ -17,7 +17,7 @@
       <p>{{ albums.description }}</p>
       <p>{% trans "Date Uploaded" %}: {{ albums.date_created }}</p>
       <p>{% trans "Description" %}: {{ albums.description }}</p>
-
+      <button><a href="{% url 'albums_edit' pk=albums.id %}">Edit Album</a></button>
       {% else %}
       <p>No Cover Photo</p>
       {% endif %}
@@ -32,7 +32,6 @@
         </span>
       {% endfor %}
     </div>
-
   {% else %}
   <h2>Keyboard Driver Error.</h2>
   {% endif %}

@@ -17,11 +17,6 @@
     {% if user.username %}
     <button><a href="{% url 'albums_create' %}">Add Album</a></button>
     <button><a href="{% url 'photo_create' %}">Add Photo</a></button>
-    
-    {% comment %}
-    <p>{% trans "Albums Created" %}: {{ priv_albums.count }}</p>
-    <p>{% trans "Photos" %}: {{ priv_photos.count }}</p>
-    {% endcomment %}
 
     {% if photo %}
     {% for picture in photo %}
@@ -33,9 +28,6 @@
 
     {% endif %}
   </section>
-
-
-
 
 
 </section>

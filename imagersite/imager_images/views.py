@@ -1,11 +1,11 @@
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from django.views.generic.edit import FormView
 from imager_images.models import Albums, Photo
 from imager_profile.models import ImagerProfile
-from .forms import PhotoForm, AlbumsForm
+from .forms import PhotoForm, AlbumsForm, PhotoEditForm, AlbumsEditForm
 from django.conf import settings
 
 
@@ -90,7 +90,7 @@ class PhotoViewDetail(DetailView):
 
 
 class PhotoCreateView(LoginRequiredMixin, CreateView):
-    """Lets a uer add a photo."""
+    """Lets a user add a photo."""
     template_name = 'imager_profile/photo_add.html'
     login_url = reverse_lazy('auth_login')
     form_class = PhotoForm
@@ -122,4 +122,52 @@ class AlbumsCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class PhotoEditView(LoginRequiredMixin, UpdateView):
+    """Lets a user edit existing photo information."""
+    template_name = "imager_profile/photo_edit.html"
+    model = Photo
+    form_class = PhotoEditForm
+    login_url = reverse_lazy('auth_login')
+    success_url = reverse_lazy('photo')
+    slug_url_kwarg = 'photo_id'
+    slug_field = 'id'
+
+    def get(self, *args, **kwargs):
+        self.kwargs['username'] = self.request.user.get_username()
+        return super().get(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        self.kwargs['username'] = self.request.user.get_username()
+        return super().post(*args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.title = form.data['title']
+        form.instance.save()
+        return super().form_valid(form)
+
+
+class AlbumsEditView(LoginRequiredMixin, UpdateView):
+    """Lets a user edit existing albums information."""
+    template_name = "imager_profile/albums_edit.html"
+    model = Albums
+    form_class = AlbumsEditForm
+    login_url = reverse_lazy('auth_login')
+    success_url = reverse_lazy('albums')
+    slug_url_kwarg = 'album_id'
+    slug_field = 'id'
+
+    def get(self, *args, **kwargs):
+        self.kwargs['username'] = self.request.user.get_username()
+        return super().get(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        self.kwargs['username'] = self.request.user.get_username()
+        return super().post(*args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.name = form.data['title']
+        form.instance.save()
         return super().form_valid(form)
