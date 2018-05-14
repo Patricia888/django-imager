@@ -14,6 +14,7 @@
 
   <section class="profile-info">
     <h2>Phtoto Information</h2>
+    <h4>Click a photo for more information</h4>
 
     {% for pic in photo %}
     <a href="{% url "photo_view_detail" pk=pic.id %}">

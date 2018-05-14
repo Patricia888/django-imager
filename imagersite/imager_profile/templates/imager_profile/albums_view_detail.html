@@ -1,6 +1,7 @@
 {% extends "generic/base.html" %}
 {% load thumbnail %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
 <div class="albums-detail-container container">
@@ -10,9 +11,13 @@
 
   <div class="detail-cover">
     {% if albums.cover %}
-      {% thumbnail albums.cover "150x150" crop="center" as im %}
+      {% thumbnail albums.cover.image "x250" crop="center" as im %}
       <img src="{{ im.url }}" alt="albums.title">
       {% endthumbnail %}
+      <p>{{ albums.description }}</p>
+      <p>{% trans "Date Uploaded" %}: {{ albums.date_created }}</p>
+      <p>{% trans "Description" %}: {{ albums.description }}</p>
+      <button><a href="{% url 'albums_edit' pk=albums.id %}">Edit Album</a></button>
       {% else %}
       <p>No Cover Photo</p>
       {% endif %}
@@ -20,14 +25,13 @@
     <div class="detail-albums">
       {% for photo in albums.photos.all %}
         <span class="photo-thumb" style="display: inline-block;">
-          {% thumbnail photo.image "150x150" crop="center" as im %}
-          <img src="{{ im.url }}" alt="photo.name">
+          {% thumbnail photo.image "x150" crop="center" as im %}
+          <img src="{{ im.url }}" alt="photo.title">
           <p>{{ photo.description }}</p>
           {% endthumbnail %}
         </span>
       {% endfor %}
     </div>
-
   {% else %}
   <h2>Keyboard Driver Error.</h2>
   {% endif %}

@@ -15,6 +15,10 @@
 
   <section class="profile-info">
     <h2>Profile Information</h2>
+    <p>{% trans "Bio:" %} {{ profile.user.bio }}</p>
+    <p>{% trans "Location:" %} {{ profile.user.location }}</p>
+    <p>{% trans "Website:" %} {{ profile.user.website }}</p>
+    <p>{% trans "Phone:" %} {{ profile.user.phone }}</p>
     <p>{% trans "Public Albums Created:" %} {{ pub_albums.count }}</p>
     <p>{% trans "Public Photos Created:" %} {{ pub_photos.count }}</p>
     {% if profile.user.username == user.username %}
