@@ -138,21 +138,21 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-SASS_PROCESSOR_AUTO_INCLUDE = False
-SASS_PRECISION = 8
-SASS_OUTPUT_STYLE = 'compact'
+# SASS_PROCESSOR_AUTO_INCLUDE = False
+# SASS_PRECISION = 8
+# SASS_OUTPUT_STYLE = 'compact'
 
 
-STATICFILES_DIRS = [
-    ('node_modules', '../node_modules/'),
-]
+# STATICFILES_DIRS = [
+#     ('node_modules', '../node_modules/'),
+# ]
 
 # put vars here
-SASS_PROCESSOR_CUSTOM_FUNCTIONS = {
-    # 'get-color': 'myproject.utils.get_color',
-}
+# SASS_PROCESSOR_CUSTOM_FUNCTIONS = {
+#     # 'get-color': 'myproject.utils.get_color',
+# }
 
-NODE_MODULES_URL = STATIC_URL + 'node_modules/'
+# NODE_MODULES_URL = STATIC_URL + 'node_modules/'
 
 # STATICFILES_STORAGE = 'sass_processor.storage.SassS3Boto3Storage'
 

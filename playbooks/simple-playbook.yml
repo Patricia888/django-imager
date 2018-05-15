@@ -113,8 +113,8 @@
 
 # Don't forget to collectstatic and migrate if necessary
 
-    # - name: Collect static
-    #   django_manage:
-    #     command: collectstatic
-    #     app_path: /home/ubuntu/djangoimager/imagersite
-    #     virtualenv: /home/ubuntu/ENV
+    - name: Collect static
+      django_manage:
+        command: collectstatic
+        app_path: /home/ubuntu/djangoimager/imagersite
+        virtualenv: /home/ubuntu/ENV
