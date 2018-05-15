@@ -1,10 +1,7 @@
 {% extends "generic/base.html" %}
-{% load thumbnail %}
 {% load i18n %}
-{% load static %}
 
 {% block content %}
-
 <div class="photo-edit container">
         <form class="photo-edit-form" method="POST">
           {% csrf_token %}

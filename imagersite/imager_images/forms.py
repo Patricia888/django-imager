@@ -37,12 +37,11 @@ class PhotoEditForm(ModelForm):
         fields = ['image', 'title', 'description', 'published']
 
     def __init__(self, *args, **kwargs):
-        # import pdb; pdb.set_trace()
-        username = kwargs.pop('username')
         super().__init__(*args, **kwargs)
+        username = kwargs.pop('username')
 
         self.fields['image'].queryset = Photo.objects.filter(
-                                        user__username=username)
+                                        album__user__username=username)
 
 
 class AlbumsEditForm(ModelForm):
