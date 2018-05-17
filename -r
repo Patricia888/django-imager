@@ -1,13 +1,15 @@
 appnope==0.1.0
 backcall==0.1.0
+confusable-homoglyphs==3.0.0
 coverage==4.5.1
 decorator==4.3.0
-Django-registration==2.4.1
 Django==2.0.4
+django-appconf==1.0.2
 django-compressor==2.2
 django-multiselectfield==0.1.8
-djangorestframework==3.8.2  
+django-registration==2.4.1
 django-sass-processor==0.7
+djangorestframework==3.8.2
 factory-boy==2.10.0
 Faker==0.8.13
 flake8==3.5.0
@@ -23,6 +25,7 @@ pexpect==4.5.0
 pickleshare==0.7.4
 Pillow==5.1.0
 prompt-toolkit==1.0.15
+psycopg2==2.7.4
 psycopg2-binary==2.7.4
 ptyprocess==0.5.2
 pycodestyle==2.3.1
@@ -30,6 +33,8 @@ pyflakes==1.6.0
 Pygments==2.2.0
 python-dateutil==2.7.2
 pytz==2018.4
+rcssmin==1.0.6
+rjsmin==1.0.12
 simplegeneric==0.8.1
 six==1.11.0
 sorl-thumbnail==12.4.1
