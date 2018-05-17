@@ -1,8 +1,10 @@
-from django.urls import path
-from .views import PhotoListApi
 from rest_framework.authtoken import views
+from .views import PhotoListApi, UserApi
+from django.urls import path
+
 
 urlpatterns = [
     path('photo/', PhotoListApi.as_view(), name="photo_list_api"),
-    # path('auth-token-login/', views.obtain_auth_token)
+    path('user/', UserApi.as_view(), name='user-detail'),
+    path('login', views.obtain_auth_token),
 ]
